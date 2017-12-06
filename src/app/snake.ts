@@ -49,7 +49,7 @@ export class Snake {
 
     //Controllo se mangio me stesso
 	checkCannibal(SnakeX : number, SnakeY : number) : void{
-        for(var i = 0; i < this.length-1 ; i++){
+        for(var i = 0; i < this.body.length ; i++){
             if(SnakeX == this.body[i].x && SnakeY == this.body[i].y){
                 alert("cann");
                 //return true;
