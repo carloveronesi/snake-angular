@@ -9,6 +9,12 @@
   }
 </style>
 
+<!-- messaggio di gameover / vittoria -->
+<div *ngIf="stopGame" id="message">
+    <h2>{{message}}</h2>
+    <button type="button" onClick="window.location.reload()">NEW GAME</button>
+</div>
+
 <div id="score">Score:  {{score}}</div>
 <hr>
 apple.x: {{apple.x}}.<br>

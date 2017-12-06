@@ -22,7 +22,7 @@ export class Snake {
         }
     }
 
-    //TODO: muovo lo snake in base alla direzione   
+    //Muovo lo snake in base alla direzione   
     move(): void{
         var SnakeX = this.body[0].x;																		//Variabili temporanee di posizione
         var SnakeY = this.body[0].y;
@@ -31,13 +31,33 @@ export class Snake {
 
         SnakeX += this.direction.x;																			//Sposto in base alla direzione
         SnakeY += this.direction.y;
-        
-        //TODO: Controllo
+
+        //this.checkCannibal(SnakeX, SnakeY);
 
         tail.x = SnakeX; 																				//Ok, setto la nuova posizione
         tail.y = SnakeY;
     
         this.body.unshift(tail);
+    }
+
+    //Aggiungo un pezzo al corpo dello snake che diventa la sua coda
+    addTale() : void{
+        var copia : Position = new Position(this.body[this.body.length-1].x,this.body[this.body.length-1].y);			//Copio la coda
+        copia.x-= this.direction.x;																		//Creo la nuova coda
+        copia.y-= this.direction.y;
+        this.body.push(copia);	
+    }
+
+    //Controllo se mangio me stesso
+	checkCannibal(SnakeX : number, SnakeY : number) : void{
+        for(var i = 0; i < this.length ; i++){
+            if(SnakeX == this.body[i].x && SnakeY == this.body[i].y){
+                alert("cann");
+                //return true;
+            }
+                
+        }
+       // return false;
     }
 
   }

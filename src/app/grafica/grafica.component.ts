@@ -8,7 +8,7 @@ const ROWS = 10;                                                                
 const SNAKE_INIT_X = 0;
 const SNAKE_INIT_Y = 5;
 const SNAKE_INIT_LEN = 3;
-const UPDATE_INTERVAL = 200;
+const UPDATE_INTERVAL = 500;
 
 @Component({
   selector: 'app-grafica',
@@ -22,7 +22,8 @@ export class GraficaComponent implements OnInit {
   apple : Apple = new Apple();                                                              //Mela
   snake : Snake = new Snake(SNAKE_INIT_X, SNAKE_INIT_Y, SNAKE_INIT_LEN);                    //Snake
   interval;                                                                                 //Intervallo aggiornamento
-
+  stopGame : boolean = false;
+  message : string = "";
 
 
   //Inizializzo la matrice ed assegno a 0
@@ -46,11 +47,11 @@ export class GraficaComponent implements OnInit {
 
   //Funzione che genera una nuova apple
   generateApple() : void {
-    do{
-      this.apple.y = Math.floor(Math.random()*COLUMNS-1);
-      this.apple.x = Math.floor(Math.random()*ROWS-1);
+    //do{
+      this.apple.y = Math.floor(Math.random()*(COLUMNS-1));
+      this.apple.x = Math.floor(Math.random()*(ROWS-1));
       this.drawApple();
-    }while(this.apple.x == SNAKE_INIT_X && this.apple.y == SNAKE_INIT_Y);                 //Evito che si sovrappongano snake ed apple
+    //}while(this.apple.x == SNAKE_INIT_X && this.apple.y == SNAKE_INIT_Y);                 //Evito che si sovrappongano snake ed apple
   }  
   
   //Disegno la mela
@@ -68,7 +69,7 @@ export class GraficaComponent implements OnInit {
     switch(val){
       case 1: return "red";                                                               //apple
       case 2: return "green";                                                             //Corpo snake
-      case 3: return "darkgreen"                                                          //testa snake
+      case 3: return "blue"                                                          //testa snake
       default: return "lightgrey";                                                        //vuoto
     }
   }
@@ -90,6 +91,7 @@ export class GraficaComponent implements OnInit {
     if(this.apple.x == x && this.apple.y == y){
       this.score++;
       this.generateApple();
+      this.snake.addTale();
     }
 
   }
@@ -98,20 +100,28 @@ export class GraficaComponent implements OnInit {
   move(dir : string) : void {
     switch(dir){
       case "up":
-        this.snake.direction.x = 0;
-        this.snake.direction.y = -1;
+        if(this.snake.direction.y != 1){
+          this.snake.direction.x = 0;
+          this.snake.direction.y = -1;
+        }
         break;
       case "down":
-        this.snake.direction.x = 0;
-        this.snake.direction.y = 1;
+        if(this.snake.direction.y != -1){
+          this.snake.direction.x = 0;
+          this.snake.direction.y = 1;
+        }
         break;
       case "left":
-        this.snake.direction.x = -1;
-        this.snake.direction.y = 0;
+        if(this.snake.direction.x != 1){
+          this.snake.direction.x = -1;
+          this.snake.direction.y = 0;
+        }
         break;
       case "right":
-        this.snake.direction.x = 1;
-        this.snake.direction.y = 0;
+        if(this.snake.direction.x != -1){
+          this.snake.direction.x = 1;
+          this.snake.direction.y = 0;
+        }
         break;
     }
   }
@@ -124,9 +134,14 @@ export class GraficaComponent implements OnInit {
       this.drawApple();                                                                 //Genero la apple
       this.updateSnake();
     }else{                                                                              //GAME OVER
-      alert("GAME OVER");
-      clearInterval(this.interval);
+      this.gameOver();
     }
+  }
+
+  gameOver() : void {
+    this.stopGame = true;
+    this.message = "GAME OVER";
+    clearInterval(this.interval);
   }
 
   //Aggiorno il disegno dello snake
@@ -148,7 +163,7 @@ export class GraficaComponent implements OnInit {
   ngOnInit() {                                                                        //Inzializzazione
     this.generateMatrix();                                                            //Inizializzo la matrice
     this.generateApple();                                                             //Genero la mela
-    this.interval = setInterval(() => { this.draw() }, UPDATE_INTERVAL);                          //Disegno
+    this.interval = setInterval(() => { this.draw() }, UPDATE_INTERVAL);              //Disegno
   }
 
 }
