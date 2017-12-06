@@ -3,14 +3,14 @@ import { Apple } from '../apple';
 import { Snake } from '../snake';
 
 //Costanti
-const COLUMNS = 10;                                                                    //Costante lunghezza colonne
-const ROWS = 10;                                                                       //Costante lunghezza righe
+const COLUMNS = 10;                                                                     //Costante lunghezza colonne
+const ROWS = 10;                                                                        //Costante lunghezza righe
 const SNAKE_INIT_X = 0;
 const SNAKE_INIT_Y = 5;
 const SNAKE_INIT_LEN = 3;
 const UPDATE_INTERVAL = 500;
 const WIN_SCORE = 8;
-const COLOR_HEAD = "darkgreen";
+const COLOR_HEAD = "blue";
 const COLOR_BODY = "green";
 const COLOR_APPLE = "red";
 const COLOR_EMPTY = "lightgrey";
@@ -25,12 +25,12 @@ const MESSAGE_GAME_OVER = "game over";
 
 export class GraficaComponent implements OnInit {
   score : number = 0;
-  matrix = new Array(COLUMNS);                                                              //Matrice contenente i dati di ogni singola cella
-  apple : Apple = new Apple();                                                              //Mela
-  snake : Snake = new Snake(SNAKE_INIT_X, SNAKE_INIT_Y, SNAKE_INIT_LEN);                    //Snake
-  interval;                                                                                 //Intervallo aggiornamento
-  stopGame : boolean = false;                                                               //mostro o no il messaggio di vittoria / game over?
-  message : string = "";                                                                    //Testo messaggio di vittoria / game over
+  matrix = new Array(COLUMNS);                                                          //Matrice contenente i dati di ogni singola cella
+  apple : Apple = new Apple();                                                          //Mela
+  snake : Snake = new Snake(SNAKE_INIT_X, SNAKE_INIT_Y, SNAKE_INIT_LEN);                //Snake
+  interval;                                                                             //Intervallo aggiornamento
+  stopGame : boolean = false;                                                           //mostro o no il messaggio di vittoria / game over?
+  message : string = "";                                                                //Testo messaggio di vittoria / game over
 
 
   //Inizializzo la matrice ed assegno a 0
@@ -78,10 +78,11 @@ export class GraficaComponent implements OnInit {
     }
   }
 
-  //Controllo collisioni
+  //Controllo collisioni con il bordo del gioco
   checkCollision() : boolean{
     var x = this.snake.body[0].x;
     var y = this.snake.body[0].y;
+
     if(x == ROWS || y == COLUMNS || x == -1 || y == -1)
       return true;
     return false;
@@ -97,7 +98,6 @@ export class GraficaComponent implements OnInit {
       this.generateApple();
       this.snake.addTale();
     }
-
   }
 
   //Movimento dello snake
@@ -161,24 +161,24 @@ export class GraficaComponent implements OnInit {
 
   //Aggiorno il disegno dello snake
   updateSnake(): void{
-    for (var i = 0; i < this.snake.body.length; i++) {
+    for (var i = this.snake.body.length-1; i >= 0; i--) {
       var x = this.snake.body[i].x;
       var y = this.snake.body[i].y;
       if(x >=0 && y >=0){
         if(i == 0)
-          this.matrix[y][x] = 3;                                                      //Testa
+          this.matrix[y][x] = 3;                                                        //Testa
         else
-          this.matrix[y][x] = 2;                                                      //Corpo
+          this.matrix[y][x] = 2;                                                        //Corpo
       }
     }
   }
 
   constructor() { }
 
-  ngOnInit() {                                                                        //Inzializzazione
-    this.generateMatrix();                                                            //Inizializzo la matrice
-    this.generateApple();                                                             //Genero la mela
-    this.interval = setInterval(() => { this.draw() }, UPDATE_INTERVAL);              //Disegno
+  ngOnInit() {                                                                          //Inzializzazione
+    this.generateMatrix();                                                              //Inizializzo la matrice
+    this.generateApple();                                                               //Genero la mela
+    this.interval = setInterval(() => { this.draw() }, UPDATE_INTERVAL);                //Disegno
   }
 
 }

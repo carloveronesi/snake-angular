@@ -16,7 +16,6 @@ export class Snake {
 
     //Inizializzo body
     initialize(): void{
-
         for(var i = 0; i < this.length ; i++){
             this.body.push(new Position(this.init.x - i,this.init.y));	
         }
@@ -32,7 +31,7 @@ export class Snake {
         SnakeX += this.direction.x;																			//Sposto in base alla direzione
         SnakeY += this.direction.y;
 
-        //this.checkCannibal(SnakeX, SnakeY);
+        this.checkCannibal(SnakeX, SnakeY);
 
         tail.x = SnakeX; 																				//Ok, setto la nuova posizione
         tail.y = SnakeY;
@@ -50,7 +49,7 @@ export class Snake {
 
     //Controllo se mangio me stesso
 	checkCannibal(SnakeX : number, SnakeY : number) : void{
-        for(var i = 0; i < this.length ; i++){
+        for(var i = 0; i < this.length-1 ; i++){
             if(SnakeX == this.body[i].x && SnakeY == this.body[i].y){
                 alert("cann");
                 //return true;

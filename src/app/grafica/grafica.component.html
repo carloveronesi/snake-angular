@@ -12,6 +12,7 @@
 <!-- messaggio di gameover / vittoria -->
 <div *ngIf="stopGame" id="message">
     <h2>{{message}}</h2>
+    <div id="score" class="msg">Score:  {{score}}</div>
     <button type="button" onClick="window.location.reload()">NEW GAME</button>
 </div>
 
@@ -40,11 +41,11 @@ testa snake y: {{this.snake.body[0].y}}
     <td>{{snake.body[2].x}}</td> 
   </tr>
   <tr>
-      <td>snake.body.y </td> 
-      <td>{{snake.body[0].y}}</td> 
-      <td>{{snake.body[1].y}}</td> 
-      <td>{{snake.body[2].y}}</td> 
-    </tr>
+    <td>snake.body.y </td> 
+    <td>{{snake.body[0].y}}</td> 
+    <td>{{snake.body[1].y}}</td> 
+    <td>{{snake.body[2].y}}</td> 
+  </tr>
 </table>
 <hr>
 
