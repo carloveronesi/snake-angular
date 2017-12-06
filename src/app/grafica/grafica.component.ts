@@ -9,6 +9,13 @@ const SNAKE_INIT_X = 0;
 const SNAKE_INIT_Y = 5;
 const SNAKE_INIT_LEN = 3;
 const UPDATE_INTERVAL = 500;
+const WIN_SCORE = 8;
+const COLOR_HEAD = "darkgreen";
+const COLOR_BODY = "green";
+const COLOR_APPLE = "red";
+const COLOR_EMPTY = "lightgrey";
+const MESSAGE_WIN = "Vittoria!";
+const MESSAGE_GAME_OVER = "game over";
 
 @Component({
   selector: 'app-grafica',
@@ -22,27 +29,24 @@ export class GraficaComponent implements OnInit {
   apple : Apple = new Apple();                                                              //Mela
   snake : Snake = new Snake(SNAKE_INIT_X, SNAKE_INIT_Y, SNAKE_INIT_LEN);                    //Snake
   interval;                                                                                 //Intervallo aggiornamento
-  stopGame : boolean = false;
-  message : string = "";
+  stopGame : boolean = false;                                                               //mostro o no il messaggio di vittoria / game over?
+  message : string = "";                                                                    //Testo messaggio di vittoria / game over
 
 
   //Inizializzo la matrice ed assegno a 0
   generateMatrix() : void {
     for (var i = 0; i < COLUMNS; i++) {
       this.matrix[i] = new Array(ROWS);
-      for (var j = 0; j < ROWS; j++) {
+      for (var j = 0; j < ROWS; j++) 
         this.matrix[i][j] = 0;
-      }
     }
   }
 
   //Pulisco la matrice assegnando tutti 0
   clear() : void {
-    for (var i = 0; i < COLUMNS; i++) {
-      for (var j = 0; j < ROWS; j++) {
+    for (var i = 0; i < COLUMNS; i++) 
+      for (var j = 0; j < ROWS; j++) 
         this.matrix[i][j] = 0;
-      }
-    }
   }
 
   //Funzione che genera una nuova apple
@@ -67,10 +71,10 @@ export class GraficaComponent implements OnInit {
   //Funzione che ritorna il colore della cella
   color(val){                                                                            
     switch(val){
-      case 1: return "red";                                                               //apple
-      case 2: return "green";                                                             //Corpo snake
-      case 3: return "blue"                                                          //testa snake
-      default: return "lightgrey";                                                        //vuoto
+      case 1: return COLOR_APPLE;                                                       //apple
+      case 2: return COLOR_BODY;                                                        //Corpo snake
+      case 3: return COLOR_HEAD;                                                        //testa snake
+      default: return COLOR_EMPTY;                                                      //vuoto
     }
   }
 
@@ -126,9 +130,12 @@ export class GraficaComponent implements OnInit {
     }
   }
 
+  //Gestione grafica de gioco
   draw(){
     this.snake.move();                                                                  //Muovo lo snake
     this.eatApple();                                                                    //Controllo se ha mangiato la mela
+    if(this.score == WIN_SCORE)                                                         //Controllo vittoria
+      this.win();
     if(!this.checkCollision()){                                                         //Controllo collisione
       this.clear();                                                                     //Creo Matrice Vuota
       this.drawApple();                                                                 //Genero la apple
@@ -138,10 +145,18 @@ export class GraficaComponent implements OnInit {
     }
   }
 
+  //Game Over
   gameOver() : void {
-    this.stopGame = true;
-    this.message = "GAME OVER";
-    clearInterval(this.interval);
+    this.stopGame = true;                                                               //Faccio apparire il messaggio
+    this.message = MESSAGE_GAME_OVER;                                                   //Assegno messaggio di game over
+    clearInterval(this.interval);                                                       //Fermo aggiornamento
+  }
+
+  //Vittoria!
+  win() : void {
+    this.stopGame = true;                                                               //Faccio apparire il messaggio
+    this.message = MESSAGE_WIN;                                                         //Assegno messaggio di vittoria
+    clearInterval(this.interval);                                                       //Fermo aggiornamento
   }
 
   //Aggiorno il disegno dello snake
