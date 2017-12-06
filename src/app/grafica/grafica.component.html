@@ -1,0 +1,55 @@
+<style>
+  table, th, td {
+    border: 1px solid black;
+    text-align: center;
+  }
+
+  table {
+    width: 100%;
+  }
+</style>
+
+<div id="score">Score:  {{score}}</div>
+<hr>
+apple.x: {{apple.x}}.<br>
+apple.y: {{apple.y}}.<br>
+<hr>
+snake.direction.x: {{snake.direction.x}}<br>
+snake.direction.y: {{snake.direction.y}}<br>
+<hr>
+testa snake x: {{this.snake.body[0].x}}<br>
+testa snake y: {{this.snake.body[0].y}}
+<hr>
+<table>
+  <tr style="background-color: grey">
+    <td>i</td> 
+    <td>0</td> 
+    <td>1</td> 
+    <td>2</td> 
+  </tr>
+  <tr>
+    <td>snake.body.x </td> 
+    <td>{{snake.body[0].x}}</td> 
+    <td>{{snake.body[1].x}}</td> 
+    <td>{{snake.body[2].x}}</td> 
+  </tr>
+  <tr>
+      <td>snake.body.y </td> 
+      <td>{{snake.body[0].y}}</td> 
+      <td>{{snake.body[1].y}}</td> 
+      <td>{{snake.body[2].y}}</td> 
+    </tr>
+</table>
+<hr>
+
+<div class="row" *ngFor="let col of matrix">
+  <div class="col" *ngFor="let row of col" [style.background-color]="color(row)">
+   <!--{{row}} -->
+  </div>
+</div>
+<div id="bottoni">
+  <button type="button" (click)="move('up')">UP</button><br>
+  <button type="button" (click)="move('left')">LEFT</button>
+  <button type="button" (click)="move('right')">RIGHT</button><br>
+  <button type="button" (click)="move('down')">DOWN</button>
+</div>

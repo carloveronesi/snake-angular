@@ -2,10 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { GraficaComponent } from './grafica/grafica.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    GraficaComponent
   ],
   imports: [
     BrowserModule

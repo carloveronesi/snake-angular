@@ -1,0 +1,33 @@
+.col{
+    width: 25px;
+    height: 25px;
+    border: 1px solid white;
+    display: inline-block;
+}
+
+.row{
+    margin: 0;
+    padding: 0;
+    height: 27px;
+}
+
+button {
+    margin: 0;
+    background-color: #bfbfbf; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+#bottoni{
+    text-align: center;
+}
+
+#score{
+    text-transform: uppercase;
+    font-weight: bold;
+}
