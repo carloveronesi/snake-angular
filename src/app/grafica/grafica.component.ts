@@ -73,7 +73,6 @@ export class GraficaComponent implements OnInit {
     }
   }
 
-
   //Controllo collisioni
   checkCollision() : boolean{
     var x = this.snake.body[0].x;
@@ -85,8 +84,14 @@ export class GraficaComponent implements OnInit {
 
   //Controllo se lo snake ha mangiato la mela
   eatApple() : void{
-    
-    this.score++;
+    var x = this.snake.body[0].x;
+    var y = this.snake.body[0].y;
+
+    if(this.apple.x == x && this.apple.y == y){
+      this.score++;
+      this.generateApple();
+    }
+
   }
 
   //Movimento dello snake
