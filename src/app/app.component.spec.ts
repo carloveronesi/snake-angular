@@ -1,10 +1,12 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { GraficaComponent } from './grafica/grafica.component';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent, 
+        GraficaComponent
       ],
     }).compileComponents();
   }));
@@ -25,3 +27,4 @@ describe('AppComponent', () => {
     expect(compiled.querySelector('h1').textContent).toContain('Welcome to app!');
   }));
 });
+
