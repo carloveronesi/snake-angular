@@ -136,7 +136,7 @@ export class GraficaComponent implements OnInit {
     this.eatApple();                                                                    //Controllo se ha mangiato la mela
     if(this.score == WIN_SCORE)                                                         //Controllo vittoria
       this.win();
-    if(!this.checkCollision()){                                                         //Controllo collisione
+    if(!this.checkCollision() && !this.snake.checkCannibal()){                          //Controllo se lo snake colpisce i bordi oppure mangia se stesso                                                  //Controllo collisione
       this.clear();                                                                     //Creo Matrice Vuota
       this.drawApple();                                                                 //Genero la apple
       this.updateSnake();
