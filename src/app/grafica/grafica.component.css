@@ -43,6 +43,7 @@ score{
     position: absolute;
     text-align: center;
     text-transform: uppercase;
+    color: white;
 }
 
 #message h2{

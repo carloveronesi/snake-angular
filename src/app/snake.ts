@@ -45,16 +45,19 @@ export class Snake {
         this.body.push(copia);	
     }
 
-    //Controllo se mangio me stesso
-	checkCannibal() : boolean{
-        var snakeX = this.body[0].x;	                                                                                //Testa dello snake																	
-        var snakeY = this.body[0].y;
+    //Controllo sovrapposizione di oggetti
+    checkOver(snakeX : number, snakeY : number) : boolean{
         for(var i = 1; i < this.body.length ; i++){                                                                     //Controllo collisione con il corpo
             if(snakeX == this.body[i].x && snakeY == this.body[i].y){
                 return true;
             }               
         }
        return false;
+    }
+
+    //Controllo se mangio me stesso
+	cannibal() : boolean{
+        return this.checkOver(this.body[0].x, this.body[0].y);
     }
 
   }

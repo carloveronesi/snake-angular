@@ -8,7 +8,7 @@ const ROWS = 10;                                                                
 const SNAKE_INIT_X = 0;
 const SNAKE_INIT_Y = 5;
 const SNAKE_INIT_LEN = 3;
-const UPDATE_INTERVAL = 500;
+const UPDATE_INTERVAL = 300;
 const WIN_SCORE = 8;
 const COLOR_HEAD = "blue";
 const COLOR_BODY = "green";
@@ -51,11 +51,11 @@ export class GraficaComponent implements OnInit {
 
   //Funzione che genera una nuova apple
   generateApple() : void {
-    //do{
+    do{
       this.apple.y = Math.floor(Math.random()*(COLUMNS-1));
       this.apple.x = Math.floor(Math.random()*(ROWS-1));
       this.drawApple();
-    //}while(this.apple.x == SNAKE_INIT_X && this.apple.y == SNAKE_INIT_Y);                 //Evito che si sovrappongano snake ed apple
+    }while(this.snake.checkOver(this.apple.x,this.apple.y));                            //Evito che si sovrappongano snake ed apple
   }  
   
   //Disegno la mela
@@ -83,7 +83,7 @@ export class GraficaComponent implements OnInit {
     var x = this.snake.body[0].x;
     var y = this.snake.body[0].y;
 
-    if(x == ROWS || y == COLUMNS || x == -1 || y == -1)
+    if(x == ROWS || y == COLUMNS || x == -1 || y == -1)                               //Bordi
       return true;
     return false;
   }
@@ -136,7 +136,7 @@ export class GraficaComponent implements OnInit {
     this.eatApple();                                                                    //Controllo se ha mangiato la mela
     if(this.score == WIN_SCORE)                                                         //Controllo vittoria
       this.win();
-    if(!this.checkCollision() && !this.snake.checkCannibal()){                          //Controllo se lo snake colpisce i bordi oppure mangia se stesso                                                  //Controllo collisione
+    if(!this.checkCollision() && !this.snake.cannibal()){                               //Controllo se lo snake colpisce i bordi oppure mangia se stesso                                                  //Controllo collisione
       this.clear();                                                                     //Creo Matrice Vuota
       this.drawApple();                                                                 //Genero la apple
       this.updateSnake();
