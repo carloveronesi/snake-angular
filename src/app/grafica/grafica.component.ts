@@ -9,7 +9,7 @@ const SNAKE_INIT_X = 0;
 const SNAKE_INIT_Y = 5;
 const SNAKE_INIT_LEN = 3;
 const UPDATE_INTERVAL = 300;
-const WIN_SCORE = 8;
+const WIN_SCORE = 2;
 const COLOR_HEAD = "blue";
 const COLOR_BODY = "green";
 const COLOR_APPLE = "red";
@@ -30,6 +30,7 @@ export class GraficaComponent implements OnInit {
   snake : Snake = new Snake(SNAKE_INIT_X, SNAKE_INIT_Y, SNAKE_INIT_LEN);                //Snake
   interval;                                                                             //Intervallo aggiornamento
   stopGame : boolean = false;                                                           //mostro o no il messaggio di vittoria / game over?
+  winGame : boolean = false;
   message : string = "";                                                                //Testo messaggio di vittoria / game over
 
 
@@ -156,6 +157,7 @@ export class GraficaComponent implements OnInit {
   win() : void {
     this.stopGame = true;                                                               //Faccio apparire il messaggio
     this.message = MESSAGE_WIN;                                                         //Assegno messaggio di vittoria
+    this.winGame = true;
     clearInterval(this.interval);                                                       //Fermo aggiornamento
   }
 

@@ -1,3 +1,6 @@
+/*
+    Tabella
+*/
 .col{
     width: 25px;
     height: 25px;
@@ -10,6 +13,10 @@
     padding: 0;
     height: 27px;
 }
+
+/*
+    Bottoni
+*/
 
 button {
     margin: 0;
@@ -27,23 +34,38 @@ button {
     text-align: center;
 }
 
+/*
+    Punteggio
+*/
+
 score{
     text-transform: uppercase;
     font-weight: bold;
+}
+
+/*
+    Messaggio fine gioco
+*/
+
+#message{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
 }
 
 .msg{
     margin-bottom: 25px;
 }
 
-#message{
-    width: 100%;
-    height: 100%;
+.win{
+    background-color: green;
+}
+
+.over{
     background-color: red;
-    position: absolute;
-    text-align: center;
-    text-transform: uppercase;
-    color: white;
 }
 
 #message h2{

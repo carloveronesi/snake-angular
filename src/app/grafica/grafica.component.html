@@ -1,27 +1,18 @@
-<style>
-  table, th, td {
-    border: 1px solid black;
-    text-align: center;
-  }
-
-  table {
-    width: 100%;
-  }
-</style>
-
 <!-- messaggio di gameover / vittoria -->
-<div *ngIf="stopGame" id="message">
+<div *ngIf="stopGame" id="message" [class.win]="winGame == true"  [class.over]="winGame == false">
     <h2>{{message}}</h2>
     <div id="score" class="msg">Score:  {{score}}</div>
     <button type="button" onClick="window.location.reload()">NEW GAME</button>
 </div>
 
+<!-- Punteggio -->
 <div id="score">Score:  {{score}}</div>
+
+<!-- Display del gioco -->
 <div class="row" *ngFor="let col of matrix">
-  <div class="col" *ngFor="let row of col" [style.background-color]="color(row)">
-   <!--{{row}} -->
-  </div>
+  <div class="col" *ngFor="let row of col" [style.background-color]="color(row)"></div>
 </div>
+<!-- Controlli -->
 <div id="bottoni">
   <button type="button" (click)="move('up')">UP</button><br>
   <button type="button" (click)="move('left')">LEFT</button>

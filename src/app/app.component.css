@@ -1,3 +1,7 @@
+/*
+    Centro orizzontalmente il gioco
+*/
+
 .centrato{
     width:270px;
     position: absolute;
@@ -5,6 +9,10 @@
     right: 0;
     margin: auto;
 }
+
+/*
+    Definisco stile globale del componente
+*/
 
 :host{
     font-family: "Arial";
