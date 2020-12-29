@@ -1,0 +1,25 @@
+{
+  "name": "snake-angular",
+  "version": "1.0.0",
+  "description": "Simple snake game built with Angular",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carloveronesi/snake-angular.git"
+  },
+  "keywords": [
+    "snake",
+    "game"
+  ],
+  "author": "Carlo Veronesi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/carloveronesi/snake-angular/issues"
+  },
+  "homepage": "https://github.com/carloveronesi/snake-angular#readme"
+}
